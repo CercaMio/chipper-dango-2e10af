@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172f28">
+  <meta name="description" content="Encontrá comercios, ofertas y servicios cerca tuyo con CercaMío.">
+  <title>CercaMío | Negocios cerca tuyo</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="topbar">
+      <a class="brand" href="#" aria-label="CercaMío inicio"><span class="brand-mark">CM</span><span>Cerca<span class="brand-accent">Mío</span></span></a>
+      <button id="installBtn" class="button button-light hidden" type="button">Instalar app</button>
+    </nav>
+    <div class="hero-copy">
+      <span class="eyebrow">TU CIUDAD, TUS COMERCIOS</span>
+      <h1>Lo que buscás,<br><span>está más cerca.</span></h1>
+      <p>Descubrí negocios, servicios y ofertas de Jardín América y alrededores.</p>
+      <label class="searchbar">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="¿Qué necesitás hoy?" aria-label="Buscar comercios">
+        <button id="clearSearch" type="button" aria-label="Limpiar búsqueda">×</button>
+      </label>
+      <div class="location-line"><span class="location-dot"></span> Jardín América y alrededores <span class="demo-label">COMERCIOS LOCALES</span></div>
+    </div>
+    <div class="hero-shape shape-one"></div><div class="hero-shape shape-two"></div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="section-heading"><div><p class="eyebrow dark-eyebrow">EXPLORÁ</p><h2>Buscá por categoría</h2></div></div>
+      <div id="categoryList" class="categories" aria-label="Categorías"></div>
+    </section>
+
+    <section id="offersSection" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow dark-eyebrow">PARA APROVECHAR</p><h2>Ofertas destacadas <span class="spark">✦</span></h2></div>
+        <span class="small-note">Promociones locales</span>
+      </div>
+      <div id="offerList" class="offer-grid"></div>
+    </section>
+
+    <section id="businessSection" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow dark-eyebrow">DESCUBRÍ TU ZONA</p><h2>Negocios cerca tuyo</h2></div>
+        <span id="resultCount" class="result-count"></span>
+      </div>
+      <div id="businessList" class="business-grid"></div>
+      <div id="emptyState" class="empty-state hidden"><span>🔎</span><h3>No encontramos resultados</h3><p>Probá con otra búsqueda o categoría.</p><button class="button button-dark" id="resetFilters">Ver todos</button></div>
+    </section>
+
+    <section class="join-banner">
+      <div class="join-icon">＋</div>
+      <div><p class="eyebrow">¿TENÉS UN NEGOCIO?</p><h2>Más personas pueden encontrarte.</h2><p>Enviá los datos de tu negocio para que podamos revisarlos y publicarlos.</p></div>
+      <button class="button button-bright" id="openBusinessForm" type="button">Sumar mi negocio <span>→</span></button>
+    </section>
+    <section id="businessFormSection" class="section form-section hidden">
+      <div class="section-heading"><div><p class="eyebrow dark-eyebrow">SUMATE A CERCAMÍO</p><h2>Registrar un negocio</h2></div><button class="icon-button" id="closeBusinessForm" aria-label="Cerrar formulario">×</button></div>
+      <p class="form-note">Completá los datos de tu negocio. La ficha quedará pendiente de revisión antes de publicarse.</p>
+      <form id="businessForm" class="business-form">
+        <label>Nombre del negocio<input name="name" required maxlength="70" placeholder="Ej. Almacén La Esquina"></label>
+        <div class="form-row">
+          <label>Categoría<select name="category" required id="newCategory"></select></label>
+          <label>WhatsApp / teléfono<input name="phone" required inputmode="tel" placeholder="Ej. 3743 123456"></label>
+        </div>
+        <label>Descripción breve<textarea name="description" required maxlength="240" rows="3" placeholder="Contá qué productos o servicios ofrecés"></textarea></label>
+        <label>Dirección o zona<input name="address" maxlength="120" placeholder="Ej. Centro, Jardín América"></label>
+        <label>Enlace de oferta (opcional)<input name="offer" maxlength="120" placeholder="Ej. 10% de descuento en compras"></label>
+        <button class="button button-dark" type="submit">Enviar negocio para revisión</button>
+        <p id="formMessage" class="form-message" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark">CM</span><span>Cerca<span class="brand-accent">Mío</span></span></a>
+    <p>Conectando clientes con negocios locales.</p>
+    <span>Prototipo inicial · Jardín América, Misiones</span>
+  </footer>
+
+  <dialog id="businessDialog" class="business-dialog">
+    <button class="dialog-close" id="closeDialog" aria-label="Cerrar">×</button>
+    <div id="dialogIcon" class="dialog-icon">🏪</div>
+    <p class="eyebrow dark-eyebrow" id="dialogCategory"></p>
+    <h2 id="dialogName"></h2>
+    <p id="dialogDescription"></p>
+    <p id="dialogAddress" class="dialog-address"></p>
+    <div id="dialogOffer" class="dialog-offer hidden"></div>
+    <a id="whatsappLink" class="button button-dark button-full" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
+    <p class="dialog-disclaimer">Contactá directamente al comercio. Verificá precios, disponibilidad y condiciones antes de comprar.</p>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
